@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+
+  ssvs:
+    container_name: ssvs2
+    image: dice-registry.ad.garvan.unsw.edu.au:5000/ssvs2
+    networks:
+    - nw_ssvsdb
+    ports:
+    - 9080:8080
+    - 9443:8443
+    - 9990:9990
+
+  ssvsdb:
+    container_name: ssvsdb
+    image: dice-registry.ad.garvan.unsw.edu.au:5000/ssvsdb:legacy
+    networks:
+    - nw_ssvsdb
+    ports:
+    - 3306:3306
+    env_file:
+    - .env
+    volumes:
+    - ./data:/data
+    - ./db:/var/lib/mysql
+    command: ["mysqld", "--secure-file-priv=/data"]
+
+networks:
+  nw_ssvsdb:
+    driver: bridge

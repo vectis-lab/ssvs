@@ -1,0 +1,15 @@
+# IntelliJ
+*.iml
+.idea
+
+# project config
+ssvs.properties
+
+# Maven
+*target*
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.class
